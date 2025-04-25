@@ -1,0 +1,103 @@
+ <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rvChatList"/>
+main
+private lateinit var ricycalBinding: ActivityRicycalBinding
+    private lateinit var userAdapter: UserAdapter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        ricycalBinding=ActivityRicycalBinding.inflate(layoutInflater)
+        setContentView(ricycalBinding.root)
+        var userChat = ArrayList<UserData>()
+        Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show()
+        var userChat1 = ArrayList<UserData>()
+        userChat1.add(UserData(R.drawable.pikachu,"Mca","2","hii"))
+        userChat1.add(UserData(R.drawable.pikachu,"Mca","2","hii"))
+        userChat1.add(UserData(R.drawable.pikachu,"Mca","2","hii"))
+        userChat1.add(UserData(R.drawable.pikachu,"Mca","2","hii"))
+        userChat1.add(UserData(R.drawable.pikachu,"Mca","2","hii"))
+        userChat1.add(UserData(R.drawable.pikachu,"Mca","2","hii"))
+        userChat1.add(UserData(R.drawable.pikachu,"Mca","2","hii"))
+        userChat.addAll(userChat1)
+        userAdapter=UserAdapter(this,userChat)
+        ricycalBinding.rvChatList.layoutManager=LinearLayoutManager(this)
+        ricycalBinding.rvChatList.adapter=userAdapter
+
+    }
+
+data
+data class data(
+    var Img : Int,var Name : String,
+    var uName : String, var Msg : String
+)
+adapter
+class UserAdapter(var obj:Context,var userChat : ArrayList<UserData>) : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
+
+    class  ViewHolder(iteamView : View):RecyclerView.ViewHolder(iteamView)
+    {
+
+        var userImg = iteamView.findViewById<ImageView>(R.id.imgUser)
+        var userFName = iteamView.findViewById<TextView>(R.id.txtUserFName)
+        var userlName = iteamView.findViewById<TextView>(R.id.txtUserLName)
+        var userMsg = itemView.findViewById<TextView>(R.id.txtUserMsg)
+        var userDelete = iteamView.findViewById<ImageView>(R.id.imgDelete)
+        var rvmainview=itemView.findViewById<RelativeLayout>(R.id.rvMainView)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        var itemView = LayoutInflater.from(parent.context)
+            .inflate(R.layout.raw_userchart,parent,false)
+
+        return ViewHolder((itemView))
+    }
+
+    override fun getItemCount(): Int {
+        return userChat.size
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.userFName.text = userChat[position].userFName + " Position NO :"  +position
+        holder.userlName.text = userChat[position].userLName
+        holder.userMsg.text = userChat[position].userMsg
+        holder.userImg.setImageResource(userChat[position].userImg)
+
+
+        holder.userDelete.tag = position
+        holder.userDelete.setOnClickListener {
+            userChat.remove(userChat[position])
+            notifyDataSetChanged()
+            Toast.makeText(obj,"removed...",Toast.LENGTH_LONG ).show()
+//            obj.startActivity(Intent(obj,))
+
+
+        }
+
+        holder.rvmainview.tag=position
+        holder.rvmainview.setOnClickListener{
+            obj.startActivity(Intent(obj,UserDetailActivity::class.java)
+                .putExtra("IMG",userChat[position].userImg)
+                .putExtra("FNAME",userChat[position].userFName)
+                .putExtra("MSG",userChat[position].userLName)
+            )
+
+        }
+    }
+}
+userdetails
+ private lateinit var userDetailBinding: ActivityUserDetailBinding
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        userDetailBinding=ActivityUserDetailBinding.inflate(layoutInflater)
+        setContentView(userDetailBinding.root)
+        var img=intent.getIntExtra("IMG",0)
+        userDetailBinding.imgUserr.setImageResource(img)
+        userDetailBinding.txtUnm.text=intent.getStringExtra("FNAME")
+        userDetailBinding.txtUmsg.text=intent.getStringExtra("MSG")
+
+
+
+    }
