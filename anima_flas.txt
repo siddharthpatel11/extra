@@ -1,0 +1,42 @@
+Handler().postDelayed({
+            startActivity(Intent(this,animation::class.java))
+        },3000)
+
+anim.kt
+animationBinding=ActivityAnimationBinding.inflate(layoutInflater)
+
+        setContentView(animationBinding.root)
+        animationBinding.alphe.setOnClickListener{
+            val animation=android.view.animation.AnimationUtils.loadAnimation(this,R.anim.alpha)
+            animationBinding.txtdata.startAnimation(animation)
+        }
+        animationBinding.rotate.setOnClickListener{
+            val animation=android.view.animation.AnimationUtils.loadAnimation(this,R.anim.rotate)
+            animationBinding.txtdata.startAnimation(animation)
+        }
+        animationBinding.translate.setOnClickListener{
+            val animation=android.view.animation.AnimationUtils.loadAnimation(this,R.anim.translate)
+            animationBinding.txtdata.startAnimation(animation)
+        }
+alpha
+<alpha xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fromAlpha="0"
+    android:toAlpha="100"
+    android:duration="100000">
+
+</alpha>
+rotat
+<rotate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fromDegrees="0"
+    android:toDegrees="360"
+    android:pivotY="50"
+    android:duration="10000">
+
+</rotate>
+trastion
+<translate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:toXDelta="0"
+    android:toYDelta="500"
+    android:duration="10000">
+
+</translate>

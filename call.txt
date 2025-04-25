@@ -1,0 +1,39 @@
+//Call Implicite intent
+mainBinding.btnCall.setOnClickListener {
+            /*var intent = Intent(Intent.ACTION_CALL)
+            intent.setData(Uri.parse("tel:1234567890"))
+            startActivity(intent)*/
+            if(mainBinding.edtNumber.text.toString().isNotEmpty()) {
+                if(mainBinding.edtNumber.text.toString().length == 10) {
+                    var intent = Intent(Intent.ACTION_CALL)
+                    intent.setData(Uri.parse("tel:${mainBinding.edtNumber.text.toString()}"))
+                    startActivity(intent)
+                }else{
+                    Toast.makeText(this, "Please Enter Valid Number", Toast.LENGTH_LONG).show()
+                }
+            }else{
+                Toast.makeText(this, "Please Enter Number", Toast.LENGTH_LONG).show()
+            }
+        }	
+//manifest.xml
+<uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+//Xml 
+<androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edtNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Phone Number"
+        android:inputType="phone"
+        android:maxLength="10"
+        android:paddingLeft="10dp"/>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnCall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Call"
+        android:textSize="20dp"
+        android:textColor="@color/black"/>

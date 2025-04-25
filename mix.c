@@ -1,4 +1,4 @@
-#tre
+#tree
 #include<stdlib.h>
 struct node(){
 	struct node *left;

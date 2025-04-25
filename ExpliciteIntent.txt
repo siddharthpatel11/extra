@@ -1,0 +1,110 @@
+package com.example.cameraandcall
+
+import android.os.Bundle
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import com.example.cameraandcall.databinding.ActivityGetIntentBinding
+
+class GetIntentActivity : AppCompatActivity() {
+    private lateinit var getIntentBinding: ActivityGetIntentBinding
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        getIntentBinding = ActivityGetIntentBinding.inflate(layoutInflater)
+        setContentView(getIntentBinding.root)
+        var name = intent.getStringExtra("name")
+        if(name!=null){
+            getIntentBinding.txtName.text = "Welcome"+ " " +name
+        }else{
+            getIntentBinding.txtName.text = "Welcome"
+        }
+    }
+}	
+//GetIntent Desin 
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".GetIntentActivity">
+    <TextView
+        android:id="@+id/txtName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome"/>
+</androidx.appcompat.widget.LinearLayoutCompat>
+
+
+//Explicite intent
+package com.example.cameraandcall
+
+import android.content.Intent
+import android.os.Bundle
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import com.example.cameraandcall.databinding.ActivityExplicitIntentBinding
+import com.google.android.material.snackbar.Snackbar
+
+class ExplicitIntentActivity : AppCompatActivity() {
+    private lateinit var explicitIntentBinding: ActivityExplicitIntentBinding
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        explicitIntentBinding = ActivityExplicitIntentBinding.inflate(layoutInflater)
+        setContentView(explicitIntentBinding.root)
+        //var name = explicitIntentBinding.edtName.text.toString();
+        explicitIntentBinding.btnLogin.setOnClickListener {
+            var name = explicitIntentBinding.edtName.text.toString();
+            if(name.isNotEmpty()){
+                var intent = Intent(this, GetIntentActivity::class.java)
+                intent.putExtra("name",name)
+                startActivity(intent)
+            }else{
+                Snackbar.make(explicitIntentBinding.root,"PLease Enter Your Name", Snackbar.LENGTH_LONG).show()
+            }
+            /*if(explicitIntentBinding.edtName.text.toString().isNotEmpty()){
+                var intent = Intent(this, GetIntentActivity::class.java)
+                intent.putExtra("name",explicitIntentBinding.edtName.text.toString())
+                startActivity(intent)
+            }else{
+                Snackbar.make(explicitIntentBinding.root,"PLease Enter Your Name", Snackbar.LENGTH_LONG).show()
+            }*/
+        }
+    }
+}
+//design
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:fitsSystemWindows="true"
+    tools:context=".ExplicitIntentActivity">
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edtName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Name" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:textColor="@color/black"
+        android:layout_marginTop="10dp"
+        android:textSize="20dp"/>
+</androidx.appcompat.widget.LinearLayoutCompat>
