@@ -1,0 +1,33 @@
+.ts
+students = [
+    { rollNo: 1, name: 'Alice', div: 'A', city: 'Pune', state: 'Maharashtra', country: 'India' },
+    { rollNo: 2, name: 'Bob', div: 'B', city: 'Mumbai', state: 'Maharashtra', country: 'India' },
+  ];
+
+.html
+
+<div class="container mt-4">
+  <h2 class="mb-3">Student Details</h2>
+  <table class="table table-bordered table-striped table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th>Roll No</th>
+        <th>Name</th>
+        <th>Division</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Country</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of students">
+        <td>{{ student.rollNo }}</td>
+        <td>{{ student.name }}</td>
+        <td>{{ student.div }}</td>
+        <td>{{ student.city }}</td>
+        <td>{{ student.state }}</td>
+        <td>{{ student.country }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

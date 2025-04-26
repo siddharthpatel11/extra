@@ -1,0 +1,44 @@
+.service.ts
+ private facultyList = [
+    { id: 1, name: 'Dr. Alice Smith', department: 'Computer Science', email: 'alice@university.edu' },
+    { id: 2, name: 'Dr. Bob Johnson', department: 'Mathematics', email: 'bob@university.edu' }
+  ];
+
+  constructor() { }
+
+  getData() {
+    return this.facultyList;
+  }
+
+  showData() {
+    console.log('Faculty List:', this.facultyList);
+  }
+
+.ts
+ facultyList: any[] = [];
+
+  constructor(private facultyService: FacultyService) { }
+
+  ngOnInit(): void {
+    this.facultyList = this.facultyService.getData();
+    this.facultyService.showData(); // Optional, logs data
+  }
+
+.html
+<div class="container mt-4">
+  <h2 class="mb-4">Faculty List</h2>
+  <div class="row">
+    <div class="col-md-4 mb-4" *ngFor="let faculty of facultyList">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">{{ faculty.name }}</h5>
+          <p class="card-text"><strong>ID:</strong> {{ faculty.id }}</p>
+          <p class="card-text"><strong>Department:</strong> {{ faculty.department }}</p>
+          <p class="card-text"><strong>Email:</strong> {{ faculty.email }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

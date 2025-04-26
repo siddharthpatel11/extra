@@ -1,0 +1,49 @@
+.ts
+isEditMode = false;
+
+  faculty = {
+    id: 1,
+    name: 'Dr. John Doe',
+    department: 'Computer Science',
+    email: 'john.doe@example.com'
+  };
+
+  editProfile() {
+    this.isEditMode = true;
+  }
+
+  saveProfile() {
+    this.isEditMode = false;
+    // You can add logic here to send updated data to backend
+    console.log('Updated faculty:', this.faculty);
+  }
+
+.html
+
+<div class="card">
+  <h2>Faculty Profile</h2>
+
+  <div>
+    <label>ID:</label>
+    <input [(ngModel)]="faculty.id" [disabled]="!isEditMode" />
+  </div>
+
+  <div>
+    <label>Name:</label>
+    <input [(ngModel)]="faculty.name" [disabled]="!isEditMode" />
+  </div>
+
+  <div>
+    <label>Department:</label>
+    <input [(ngModel)]="faculty.department" [disabled]="!isEditMode" />
+  </div>
+
+  <div>
+    <label>Email:</label>
+    <input [(ngModel)]="faculty.email" [disabled]="!isEditMode" />
+  </div>
+
+  <button (click)="editProfile()" *ngIf="!isEditMode">Edit Profile</button>
+  <button (click)="saveProfile()" *ngIf="isEditMode">Save</button>
+</div>
+

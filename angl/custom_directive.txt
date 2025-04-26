@@ -1,0 +1,43 @@
+ng g d ..
+
+.directivs.ts
+@Input() appHighlightFaculty: string = '';
+
+  constructor(private el: ElementRef) {}
+
+  ngOnInit(): void {
+    if (this.appHighlightFaculty.toLowerCase() === 'computer science') {
+      this.el.nativeElement.style.color = 'blue';
+      this.el.nativeElement.style.fontWeight = 'bold';
+    }
+  }
+
+.html
+  <div class="container mt-4">
+  <h2 class="mb-4">Faculty List</h2>
+  <div class="row">
+    <div class="col-md-4 mb-4" *ngFor="let faculty of facultyList">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <!-- Directive is applied here -->
+          <h5 class="card-title" [appHighlightFaculty]="faculty.department">
+            {{ faculty.name }}
+          </h5>
+          <p class="card-text"><strong>ID:</strong> {{ faculty.id }}</p>
+          <p class="card-text"><strong>Department:</strong> {{ faculty.department }}</p>
+          <p class="card-text"><strong>Email:</strong> {{ faculty.email }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+.modul.ts
+@NgModule({
+  declarations: [
+    AppComponent,
+    FacultyListComponent,
+    HighlightFacultyDirective
+  ],
+  ...
+})

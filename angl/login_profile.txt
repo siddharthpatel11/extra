@@ -1,0 +1,49 @@
+.ts
+loginForm: FormGroup;
+
+  constructor(private fb: FormBuilder, private router: Router) {
+    this.loginForm = this.fb.group({
+      id: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(4)]]
+    });
+  }
+
+  onSubmit(): void {
+    const { id, password } = this.loginForm.value;
+
+    // Dummy validation
+    if (id === 'admin' && password === '1234') {
+      this.router.navigate(['/profile']);
+    } else {
+      alert('Invalid ID or Password');
+    }
+  }
+
+.html
+
+<div class="container mt-5">
+  <h2>Login</h2>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+    <div class="mb-3">
+      <label for="id">User ID</label>
+      <input type="text" id="id" formControlName="id" class="form-control" />
+      <div class="text-danger" *ngIf="loginForm.get('id')?.invalid && loginForm.get('id')?.touched">
+        ID is required
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="password">Password</label>
+      <input type="password" id="password" formControlName="password" class="form-control" />
+      <div class="text-danger" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+        Password must be at least 4 characters
+      </div>
+    </div>
+
+    <button class="btn btn-primary" type="submit" [disabled]="loginForm.invalid">Login</button>
+  </form>
+</div>
+
+
+

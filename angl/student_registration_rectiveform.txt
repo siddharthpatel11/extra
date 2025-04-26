@@ -1,0 +1,106 @@
+.ts
+student = {
+    firstname: '',
+    lastname: '',
+    email: '',
+    course: '',
+    university: '',
+    city: '',
+    state: '',
+    mobileno: ''
+  };
+
+  onSubmit(form: any): void {
+    if (form.valid) {
+      console.log('Student Registration:', this.student);
+    }
+  }
+
+.html
+<div class="container mt-4">
+  <h2>Student Registration (Template Driven)</h2>
+
+  <form #studentForm="ngForm" (ngSubmit)="onSubmit(studentForm)" novalidate>
+
+    <div class="mb-3">
+      <label>First Name</label>
+      <input name="firstname" class="form-control" [(ngModel)]="student.firstname"
+             required minlength="2" #fname="ngModel">
+      <div class="text-danger" *ngIf="fname.invalid && fname.touched">
+        First Name is required (min 2 characters)
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label>Last Name</label>
+      <input name="lastname" class="form-control" [(ngModel)]="student.lastname"
+             required minlength="2" #lname="ngModel">
+      <div class="text-danger" *ngIf="lname.invalid && lname.touched">
+        Last Name is required (min 2 characters)
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label>Email</label>
+      <input name="email" type="email" class="form-control" [(ngModel)]="student.email"
+             required email #email="ngModel">
+      <div class="text-danger" *ngIf="email.invalid && email.touched">
+        Enter a valid Email
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label>Course</label>
+      <input name="course" class="form-control" [(ngModel)]="student.course"
+             required #course="ngModel">
+      <div class="text-danger" *ngIf="course.invalid && course.touched">
+        Course is required
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label>University</label>
+      <input name="university" class="form-control" [(ngModel)]="student.university"
+             required #university="ngModel">
+      <div class="text-danger" *ngIf="university.invalid && university.touched">
+        University is required
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label>City</label>
+      <input name="city" class="form-control" [(ngModel)]="student.city"
+             required #city="ngModel">
+      <div class="text-danger" *ngIf="city.invalid && city.touched">
+        City is required
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label>State</label>
+      <input name="state" class="form-control" [(ngModel)]="student.state"
+             required #state="ngModel">
+      <div class="text-danger" *ngIf="state.invalid && state.touched">
+        State is required
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label>Mobile No</label>
+      <input name="mobileno" type="tel" class="form-control" [(ngModel)]="student.mobileno"
+             required minlength="10" #mobileno="ngModel">
+      <div class="text-danger" *ngIf="mobileno.invalid && mobileno.touched">
+        Mobile Number is required (min 10 digits)
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="studentForm.invalid">
+      Submit
+    </button>
+
+  </form>
+</div>
+
+
+
+

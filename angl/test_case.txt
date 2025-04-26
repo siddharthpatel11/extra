@@ -1,0 +1,34 @@
+ng test
+
+.ts
+export class GreetComponent {
+  greetUser(name: string): string {
+    return `Hello, ${name}`;
+  }
+}
+.spec.ts
+describe('GreetComponent', () => {
+  let component: GreetComponent;
+  let fixture: ComponentFixture<GreetComponent>;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [GreetComponent]
+    });
+    fixture = TestBed.createComponent(GreetComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create the component', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should return greeting message', () => {
+    const message = component.greetUser('Alice');
+    expect(message).toBe('Hello, Alice');
+  });
+});
+
+
+

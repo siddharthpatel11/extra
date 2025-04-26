@@ -1,0 +1,42 @@
+ng new module-routing-demo --routing
+cd module-routing-demo
+ng generate module components/components --flat
+
+model.ts
+@NgModule({
+  declarations: [
+    HomeComponent,
+    AboutComponent,
+    GalleryComponent,
+    SitemapComponent,
+    ContactUsComponent
+  ],
+  imports: [CommonModule],
+  exports: [
+    HomeComponent,
+    AboutComponent,
+    GalleryComponent,
+    SitemapComponent,
+    ContactUsComponent
+  ]
+})
+export class ComponentsModule {}
+
+.html
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+  <a class="navbar-brand" routerLink="/">My Site</a>
+  <ul class="navbar-nav">
+    <li class="nav-item"><a class="nav-link" routerLink="/">Home</a></li>
+    <li class="nav-item"><a class="nav-link" routerLink="/about">About</a></li>
+    <li class="nav-item"><a class="nav-link" routerLink="/gallery">Gallery</a></li>
+    <li class="nav-item"><a class="nav-link" routerLink="/sitemap">Sitemap</a></li>
+    <li class="nav-item"><a class="nav-link" routerLink="/contact-us">Contact Us</a></li>
+  </ul>
+</nav>
+
+<div class="container mt-4">
+  <router-outlet></router-outlet>
+</div>
+
+
