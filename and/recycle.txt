@@ -11,26 +11,24 @@ private lateinit var ricycalBinding: ActivityRicycalBinding
         enableEdgeToEdge()
         ricycalBinding=ActivityRicycalBinding.inflate(layoutInflater)
         setContentView(ricycalBinding.root)
-        var userChat = ArrayList<UserData>()
-        Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show()
-        var userChat1 = ArrayList<UserData>()
-        userChat1.add(UserData(R.drawable.pikachu,"Mca","2","hii"))
-        userChat1.add(UserData(R.drawable.pikachu,"Mca","2","hii"))
-        userChat1.add(UserData(R.drawable.pikachu,"Mca","2","hii"))
-        userChat1.add(UserData(R.drawable.pikachu,"Mca","2","hii"))
-        userChat1.add(UserData(R.drawable.pikachu,"Mca","2","hii"))
-        userChat1.add(UserData(R.drawable.pikachu,"Mca","2","hii"))
-        userChat1.add(UserData(R.drawable.pikachu,"Mca","2","hii"))
-        userChat.addAll(userChat1)
-        userAdapter=UserAdapter(this,userChat)
-        ricycalBinding.rvChatList.layoutManager=LinearLayoutManager(this)
-        ricycalBinding.rvChatList.adapter=userAdapter
+        var  userInfo =ArrayList<User>()
+        var  userInfo1 =ArrayList<User>()
+        userInfo1.add(User("siddharth","kem 6e bhai"))
+        userInfo1.add(User("priyank","kem 6e bhai"))
+        userInfo1.add(User("jenil","kem 6e bhai"))
+        userInfo1.add(User("umesh","kem 6e bhai"))
+        userInfo1.add(User("krunal","kem 6e bhai"))
+        userInfo1.add(User("sunil","kem 6e bhai"))
+        userInfo.addAll(userInfo1)
+
+        UserList = UserList(this,userInfo)
+        recyclerBinding.rvUser.layoutManager=LinearLayoutManager(this)
+        recyclerBinding.rvUser.adapter = UserList
 
     }
 
-data
-data class data(
-    var Img : Int,var Name : String,
+User
+data class data(var Name : String,
     var uName : String, var Msg : String
 )
 adapter
@@ -86,18 +84,68 @@ class UserAdapter(var obj:Context,var userChat : ArrayList<UserData>) : Recycler
         }
     }
 }
-userdetails
- private lateinit var userDetailBinding: ActivityUserDetailBinding
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        userDetailBinding=ActivityUserDetailBinding.inflate(layoutInflater)
-        setContentView(userDetailBinding.root)
-        var img=intent.getIntExtra("IMG",0)
-        userDetailBinding.imgUserr.setImageResource(img)
-        userDetailBinding.txtUnm.text=intent.getStringExtra("FNAME")
-        userDetailBinding.txtUmsg.text=intent.getStringExtra("MSG")
+UserList
+class UserList(var obj : Context, var userInfo: ArrayList<User>) : RecyclerView.Adapter<UserList.ViewHolder>() {
 
-
+    class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView)
+    {
+        var username = itemView.findViewById<TextView>(R.id.edtUsername)
+        var msg = itemView.findViewById<TextView>(R.id.edtMsg)
 
     }
+
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        var itemView =LayoutInflater.from(parent.context).inflate(R.layout.activity_user_list,parent,false)
+        return ViewHolder((itemView))
+    }
+
+    override fun getItemCount(): Int {
+        return userInfo.size
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.username.text = userInfo[position].userName
+        holder.msg.text = userInfo[position].msg
+
+    }
+}
+user.xml
+
+ <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#D5D3D3">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            android:id="@+id/lyuser"
+            android:layout_marginStart="10dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/edtUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Username"
+                android:textSize="20dp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/edtMsg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Message"
+                android:textSize="20dp" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnDelete"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/pikachu"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="15dp"/>
+    </RelativeLayout>
+

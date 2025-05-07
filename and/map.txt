@@ -1,0 +1,35 @@
+//manifest
+
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
+       <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDzV7DugzAtSDQQVGv8pLUI0-fmsQR8bFQ"/>
+//MainActivity
+
+    
+        mainBinding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(mainBinding.root)
+        var mapfragment = supportFragmentManager.findFragmentById(R.id.mapView) as SupportMapFragment
+        mapfragment.getMapAsync(this)
+
+    }
+
+    override fun onMapReady(p0: GoogleMap) {
+        nmap = p0
+
+        var jgUni = LatLng(23.0461,72.5288)
+        nmap.addMarker(MarkerOptions().position(jgUni).title("This is JG UNI"))
+        nmap.moveCamera(CameraUpdateFactory.newLatLngZoom(jgUni,22f))
+        nmap.mapType = GoogleMap.MAP_TYPE_SATELLITE
+        nmap.uiSettings.isZoomControlsEnabled = true
+
+    }
+
+//Xml
+ <fragment
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:id="@+id/mapView"/>

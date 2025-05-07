@@ -1,0 +1,89 @@
+.xml
+ <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:id="@+id/txtHeader"
+            android:padding="10dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/black"
+            android:text="Home"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/fl"
+            android:layout_below="@id/txtHeader"
+            android:layout_above="@id/rlBottomView"/>
+
+
+        <RelativeLayout
+            android:id="@+id/rlBottomView"
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_horizontal"
+            android:layout_height="wrap_content">
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Home"
+            android:id="@+id/btnHome"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/btnHome"
+            android:text="Search"
+            android:id="@+id/btnSearch"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Profile"
+            android:layout_toEndOf="@id/btnSearch"
+            android:id="@+id/btnProfile"/>
+        </RelativeLayout>
+
+.kt
+
+var fragmentManager = supportFragmentManager
+        var transaction = fragmentManager.beginTransaction()
+        transaction.replace(R.id.fl,HomeFragment())
+        transaction.commit()
+
+        fragmentBinding.btnHome.setOnClickListener {
+            var fragmentManager = supportFragmentManager
+            var transaction = fragmentManager.beginTransaction()
+            transaction.replace(R.id.fl,HomeFragment())
+            fragmentBinding.txtHeader.text = "Home"
+            transaction.commit()
+
+        }
+
+        fragmentBinding.btnSearch.setOnClickListener {
+            var fragmentManager = supportFragmentManager
+            var transaction = fragmentManager.beginTransaction()
+            transaction.replace(R.id.fl,SearchFragment())
+            fragmentBinding.txtHeader.text = "Search"
+            transaction.commit()
+        }
+
+        fragmentBinding.btnProfile.setOnClickListener {
+            var fragmentManager = supportFragmentManager
+            var transaction = fragmentManager.beginTransaction()
+            transaction.replace(R.id.fl,SearchFragment())
+            fragmentBinding.txtHeader.text = "Profile"
+            transaction.commit()
+
+        }
+    }
+
+home.kt
+
+override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_home, container, false)
+    }
