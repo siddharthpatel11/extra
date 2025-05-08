@@ -1,0 +1,12 @@
+.ts
+addition(a : number,b:number)
+  {
+    return a+b+1;
+  }
+....................
+it('Should add two numbers', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app.addition(3,2)).toBe(5);
+  });
+

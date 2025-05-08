@@ -1,0 +1,39 @@
+.ts
+
+  selector: 'app-root',
+  imports: [CommonModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+  animations: [
+    trigger('slideInBottom', [
+      transition(':enter', [
+        style({ transform: 'translateY(100%)' }),
+        animate('1000ms ease-out', style({ transform: 'translateY(0)' })),
+      ]),
+      transition(':leave', [
+        animate('1000ms ease-out', style({ transform: 'translateY(100%)' })),
+      ]),
+    ]),
+  ],
+})
+export class AppComponent {
+  title = 'final';
+  imageVisible = true;
+
+  toggleImage() {
+    this.imageVisible == false
+      ? (this.imageVisible = true)
+      : (this.imageVisible = false);
+  }
+}
+
+.html
+
+
+<img
+  src="https://png.pngtree.com/png-vector/20230324/ourmid/pngtree-avatar-line-gradient-circle-icon-vector-png-image_6666379.png"
+  alt="Daniel Kreider"
+  [@slideInBottom]
+  *ngIf="this.imageVisible"
+/>
+<button class="btn btn-warning" (click)="toggleImage()">Toggle</button>

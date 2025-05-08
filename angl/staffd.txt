@@ -1,0 +1,36 @@
+.html
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Department</th>
+      <th scope="col">Position</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let staff of staffDetails;let i= index">
+      <th scope="row">{{i+1}}</th>
+      <td>{{staff.id }}</td>
+    <td>{{staff.name | custom}}</td>
+    <td>{{staff.department}}</td>
+    <td>{{staff.position}}</td>
+    </tr>
+    </tbody>
+</table>
+
+.ts
+ staffDetails=[
+    { id: 1, name: 'Nilesh Taware', department: 'IT', position: 'Professor' },
+    { id: 2, name: 'Nil Mevada', department: 'Computer Science', position: 'Assistant Professor' },
+    { id: 3, name: 'Jaydeep Rathod', department: 'Mathematics', position: 'Professor' },
+    { id: 4, name: 'Shreya Pota', department: 'Physics', position: 'Assistant Professor' },
+    { id: 5, name: 'Sanjabna Jayswal', department: 'Chemistry', position: 'Professor' },
+    { id: 6, name: 'Meenaxi Malla', department: 'Biology', position: 'Assistant Professor' },
+    { id: 7, name: 'Janvi Solanki', department: 'English', position: 'Professor' }
+  ];
+
+
+  displayStaffDetails(){
+
+  }

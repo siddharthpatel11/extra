@@ -1,0 +1,52 @@
+.html
+<div class="container mt-5">
+  <div class="card p-4">
+    <h3 class="text-center">Profile</h3>
+    <p><strong>Name:</strong> {{ user.name }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Department:</strong> {{ user.department }}</p>
+    <p><strong>Role:</strong> {{ user.role }}</p>
+    <button class="btn btn-danger w-100 mt-3" (click)="logout()">Logout</button>
+  </div>
+</div>
+
+.ts
+
+
+  user = {
+    name: 'Dr. A. Patel',
+    email: 'apatel@jgu.edu',
+    department: 'Computer Science',
+    role: 'Faculty',
+  };
+
+  constructor(private authService: AuthService, private router: Router) {}
+
+  logout() {
+    this.authService.logout();
+  }
+
+.authservice
+private isAuthenticated = false;
+  private staticUsername = 'faculty123';
+  private staticPassword = 'password123';
+
+  constructor(private router: Router) {}
+
+  login(username: string, password: string): boolean {
+    if (username === this.staticUsername && password === this.staticPassword) {
+      this.isAuthenticated = true;
+      return true;
+    }
+    return false;
+  }
+
+  logout(): void {
+    this.isAuthenticated = false;
+    this.router.navigate(['/login']);
+  }
+
+  isLoggedIn(): boolean {
+    return this.isAuthenticated;
+  }
+  // constructor() { }

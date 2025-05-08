@@ -1,0 +1,37 @@
+.html
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+  <input type="text" placeholder="Enter your Name" formControlName="name" required>
+  <div class="text-danger">
+  <div *ngIf="profileForm.controls['name'].touched && profileForm.controls['name'].errors?.['required']">Name is Required</div>
+  <div *ngIf="profileForm.controls['name'].touched && profileForm.controls['name'].errors?.['minlength']" >Mininum length is 4 </div>
+  </div>
+  <input type="email" placeholder="Enter your Email" formControlName="email">
+  <div>
+    @if(profileForm.controls['email'].touched && profileForm.controls['email'].errors?.['required']){
+      <span>Enter Email</span>
+    }@else if (profileForm.controls['email'].touched && profileForm.controls['email'].errors?.['email']) {
+      <span>Enter Valid Email</span>
+    }
+  </div>
+  <input type="text" placeholder="Enter your Password" formControlName="pass">
+  <div>
+    @if(profileForm.controls['pass'].touched && profileForm.controls['pass'].errors?.['required']){
+      <span>Please Enter PAssword</span>
+    }@else if(profileForm.controls['pass'].touched && profileForm.controls['pass'].errors?.['minlength']){``
+      <span>atleast 6 Digit</span>
+    }
+  </div>
+  <br>
+  <button [disabled]="profileForm.invalid">Sumit</button>
+</form>
+
+.ts
+ profileForm = new FormGroup({
+    name : new FormControl('',[Validators.required,Validators.minLength(4)]),
+    email:new FormControl('',[Validators.required,Validators.email]),
+    pass:new FormControl('',[Validators.required,Validators.minLength(6)])
+  })
+  onSubmit(){
+    console.log(this.profileForm.value);
+    alert("Form Submitted Successfully")
+  }

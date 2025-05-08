@@ -1,0 +1,31 @@
+.html
+
+<div class="container mt-4">
+  <table class="table table-striped table-bordered">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>City</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of employeeDetails; let i = index">
+        <td>{{ item.id }}</td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.city }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+.ts
+
+  appTitle='Employee Details';
+  employeeDetails:any[]=[
+
+    {id:1,name:'Nil MEvada',dept:'IT',city:'Ahmedabad'},
+    {id:2,name:'Nilesh Taware',dept:'IT',city:'Mumbai'},
+    {id:3,name:'Sanjana Jayswal',dept:'Comp Science',city:'Ahmedabad'},
+    {id:4,name:'Shreyas Trivedi',dept:'Chem',city:'Delhi'},
+  ];
