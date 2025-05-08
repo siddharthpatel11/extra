@@ -1,12 +1,59 @@
-.ts
-addition(a : number,b:number)
-  {
-    return a+b+1;
-  }
-....................
-it('Should add two numbers', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.addition(3,2)).toBe(5);
+.space.ts
+
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { MathComponent } from './math.component';
+
+describe('MathComponent', () => {
+  let component: MathComponent;
+  let fixture: ComponentFixture<MathComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [MathComponent]
+    })
+    .compileComponents();
+
+    fixture = TestBed.createComponent(MathComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
   });
 
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+  it('should add two number', () => {
+    expect(component.add(5,3)).toBe(8)
+  });
+  it('should substract two number', () => {
+    expect(component.sub(5,3)).toBe(2)
+  });
+  it('should multiply two number', () => {
+    expect(component.mul(5,3)).toBe(15)
+  });
+});
+
+.ts
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-math',
+  imports: [],
+  templateUrl: './math.component.html',
+  styleUrl: './math.component.css'
+})
+export class MathComponent {
+add(a:number,b:number){
+  return a+b;
+}
+sub(a:number,b:number){
+  return a-b;
+}
+mul(a:number,b:number){
+  return a*b;
+}
+div(a:number,b:number){
+  return a/b;
+}
+}
